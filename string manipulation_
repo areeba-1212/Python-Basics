@@ -1,0 +1,19 @@
+# tell if a sting is palindrome or not using loop ,else if built in coomads 
+
+input="A man a plan a canaL Panama"
+input=input.lower()
+sets=list(input.replace(" ",""))
+print(sets)
+x=len(sets)
+x=x-1
+ans=True
+print ("sets is ",sets)
+for i in range(0,x//2,+1):
+    print(sets[i],sets[x])
+    if sets[i]==sets[x]:
+      x=x-1
+      ans=True
+    else:
+       ans=False
+       break
+print("it is palindrome:" ,ans)
