@@ -1,0 +1,29 @@
+
+# Reverse String
+#Write a function that reverses a string. The input string is given as an array
+#of characters. You can use Python list to create the array of characters.
+
+
+#using loop for reversing string including pop
+
+input=["h","e","l","l","o"]
+rev=[]
+print(input)
+length=len(input)
+x=0
+for x in range(length):
+ x=input.pop()
+ rev.append(x)
+ print(x)
+
+print("input string now is  : ", input)
+print("rev string is: ", rev)
+
+#using reversed loop for reversing string 
+nput=["h","e","l","l","o"]
+rev=[]
+for x in range(len(nput)-1,0,-1):
+ rev.append(nput[x])
+
+print("rev string is: ", rev)
+ 
