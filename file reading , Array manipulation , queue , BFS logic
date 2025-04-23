@@ -1,0 +1,47 @@
+from collections import deque
+
+matrix = []
+with open("/home/bit-and-bytes/Desktop/data.txt", "r") as file:
+    matrix = [line.strip().split() for line in file]
+
+
+start = None
+for i in range(len(matrix)):
+    for j in range(len(matrix[i])):
+        if matrix[i][j] == 'S':
+            start = (i, j)
+            break
+    if start:
+        break
+
+
+queue = deque()
+visited = set()
+
+
+queue.append((start[0], start[1], []))  
+
+
+directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+
+while queue:
+    x, y, path = queue.popleft()
+
+    if (x, y) in visited:
+        continue
+    visited.add((x, y))
+
+    path = path + [(x, y)]
+
+    if matrix[x][y] == 'G':
+        print("Reached Goal! finally")
+        print("Shortest Path:", path)
+        break
+
+    for dx, dy in directions:
+        nx, ny = x + dx, y + dy
+
+        
+        if 0 <= nx < len(matrix) and 0 <= ny < len(matrix[0]):
+            if matrix[nx][ny] == '0' or matrix[nx][ny] == 'G':
+                queue.append((nx, ny, path))
