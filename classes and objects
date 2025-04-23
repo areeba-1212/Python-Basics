@@ -1,0 +1,31 @@
+class bankaccount:
+ 
+ def __init__(self,balance=0,user="basic"):
+  self.balance=balance
+  self.user=user
+
+ def deposit(self,ammount):
+  self.balance+=ammount
+  print("ammount after deposited is :",self.balance )
+
+
+ def withdraw(self,ammount):
+  if self.balance>=ammount:
+   self.balance-=ammount
+   print("ammount after witdraw is :",self.balance )
+  else:
+   print("not possible")
+
+ def status(self):
+  if self.balance>=200:
+   self.status="medium"
+   print("status is ",self.status)
+  
+
+ 
+
+mycc=bankaccount()
+mycc.deposit(500)
+mycc.withdraw(100)
+mycc.status()
+ 
