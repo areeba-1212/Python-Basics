@@ -1,0 +1,19 @@
+sets 
+class_a = ["Alice", "Bob", "Charlie", "David", "Eva"]
+class_b = ["Charlie", "Eva", "Frank", "Grace", "Alice"]
+ 
+c_a=set(class_a)
+c_b=set(class_b)
+ 
+ 
+c_c=set(class_a )& set(class_b)
+print(" students who are in both classes (intersection).",c_c)
+ 
+c_d=set(class_a ) ^set(class_b)
+print(" students who are in only one of the two classes ",c_d)
+ 
+c_e=set(class_a ) - set(class_b)
+print(" only in Class A but not in Class B.",c_e)
+ 
+countt=len(c_d)+len(c_c)
+print(" the total number of unique students from both classes",countt)
