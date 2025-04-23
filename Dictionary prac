@@ -1,0 +1,30 @@
+studentsData={"ali":
+              {"phone no":"123",
+               "age":3,
+               "score":75
+               },
+               "marib":
+              {"phone no":456,
+               "age":5,
+               "score":85
+               },
+               "sara":
+               {"phone no":789,
+               "age":7,
+               "score":95
+                   
+               }
+}
+
+averageage=0
+length=len(studentsData.items())
+print(length)
+print("students details : ")
+for name ,info in studentsData.items():
+    if info["age"]==5:
+        print(f"found {name} has {info["age"]}")
+
+for name ,info in studentsData.items():
+    averageage=info["age"]+averageage
+
+print (averageage/length)
