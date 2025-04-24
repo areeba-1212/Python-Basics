@@ -1,0 +1,7 @@
+import basics1
+
+
+person2=basics1.Person("sara",39,"ikj@gmail.com")
+myaccount=basics1.bankaccount(person2)
+myaccount.deposit(500)
+myaccount.status()
