@@ -1,0 +1,12 @@
+mystring="hello its me "
+mystring=mystring.replace(" ","")
+myss=list(mystring)
+
+print(myss)
+myiter=iter(myss)
+i=0
+
+for x in range(len(mystring)):
+    x=next(myiter)
+    i+=1
+    print(x,i)
