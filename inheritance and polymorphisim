@@ -1,0 +1,76 @@
+
+class Person:
+ def __init__(self,name , age , email):
+  self.name=name
+  self.age=age
+  self.email=email
+
+ def showdetail(self):
+  print(f"Name:{self.name} , Age:{self.age}, Email:{self.email}" )
+
+class bankaccount:
+ 
+ def __init__(self,person,balance=0,user="basic"):
+  self.person=person
+  self.balance=balance
+  self.user=user
+   
+ def deposit(self,ammount):
+  if ammount>0: 
+   self.balance+=ammount
+   print("ammount after deposited is :",self.balance )
+
+
+ def withdraw(self,ammount):
+  if self.balance>=ammount:
+   self.balance-=ammount
+   print("ammount after witdraw is :",self.balance )
+  else:
+   print("not possible")
+   print("your bank balance is",self.balance)
+
+
+ def status(self):
+  if self.balance>=200:
+   self.status="medium"
+   self.person.showdetail()
+   print("status is ",self.status)
+  elif self.balance<=0:
+   self.status="basic"
+  
+  
+class savingaccount(bankaccount):
+ def __init__(self, person, balance=0, user="basic",interest=0.25):
+  super().__init__(person, balance, user)
+  self.interest=interest
+
+ def withdraw(self, amount):
+        # Custom logic: maintain minimum balance of 100
+        if self.balance - amount >= 100:
+            self.balance -= amount
+            print("Savings withdrawal successful. Balance is:", self.balance)
+        else:
+            print("Withdrawal denied. Minimum balance of 100 must be maintained.")
+
+ def applyinterest(self):
+   self.balance=self.balance- self.interest
+   print(f"New balance after applying interest is {self.balance}")
+
+ def removeinterest(self):
+   self.balance=self.balance+self.interest
+   print(f"New balance after removing interest is {self.balance}")
+ 
+person1=Person("ali",30,"abc@gmail.com")
+mycc=bankaccount(person1)
+mycc.deposit(500)
+mycc.deposit(80)
+mycc.withdraw(100)
+mycc.withdraw(4000)
+mysavingaccount=savingaccount("sarmad",20,"hij@gmail.com")
+mysavingaccount.deposit(2000)
+mysavingaccount.withdraw(50)
+mysavingaccount.applyinterest()
+mysavingaccount.removeinterest()
+mycc.status()
+
+ 
