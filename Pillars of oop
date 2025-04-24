@@ -1,0 +1,78 @@
+
+1. Encapsulation = Data + Functions → in one place
+
+class Student:
+    def __init__(self, name):
+        self.name = name  # ← data
+    def greet(self):      # ← function
+        print("Hello", self.name)
+
+s1 = Student("Ali")
+s1.greet()
+_____________________________________________________________________________________________________
+
+2. Inheritance = Child gets from Parent
+
+
+🔹 Child class reuses and extends the parent class.
+
+class Animal:
+    def sound(self):
+        print("Makes a sound")
+
+class Dog(Animal):  # Dog inherits from Animal
+    def bark(self):
+        print("Barks")
+
+d = Dog()
+d.sound()  # From parent
+d.bark()   # From child
+
+_____________________________________________________________________________________________________
+
+3.  Polymorphism = Inheritance + Method Overriding
+
+class Cat:
+    def speak(self):
+        print("Meow")
+
+class Dog:
+    def speak(self):
+        print("Woof")
+
+# Polymorphism:
+def make_animal_speak(animal):
+    animal.speak()
+
+make_animal_speak(Cat())  # Meow
+make_animal_speak(Dog())  # Woof
+
+_____________________________________________________________________________________________________
+
+4- Composition It's a "has-a" relationship.
+
+class Person:
+    def __init__(self, name):
+        self.name = name
+
+class BankAccount:
+    def __init__(self, person, balance):
+        self.person = person  # ← composition: person is an object
+        self.balance = balance
+
+    def show_account(self):
+        print(f"{self.person.name}'s balance is {self.balance}")
+
+_____________________________________________________________________________________________________
+5- Abstraction = Show only essentials, hide the rest
+
+    Formula: Show What → Hide How
+
+🔹 Use classes/methods without knowing how they work inside.
+
+class Remote:
+    def press_power(self):  # User uses this
+        print("TV turned on")  # Hidden logic
+
+r = Remote()
+r.press_power()  # You use the method, don't need to know inner
