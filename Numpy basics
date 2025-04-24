@@ -1,0 +1,11 @@
+import numpy as np
+
+ary=[6,2,1,5,3]
+x=np.sort(ary)
+print(f"array sorted by np is :",x)
+y=np.searchsorted(x,3)
+print("sorted search on array to find 3 is at pos :",y)
+x=np.array_split(x,3)
+print(f"divivding the data of lists in multiple arrays on demand ",x)
+x=np.mean(ary)
+print("mean is :",x)
