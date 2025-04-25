@@ -1,0 +1,35 @@
+import pandas as pd
+
+df = pd.read_csv("/home/bit-and-bytes/Desktop/mydata.csv")
+
+
+print("head")
+x=df.head(10)  
+
+print(x)
+print("tail")
+x=df.tail(5)
+print(x)     
+print("info")
+x=df.info()    
+print(x)     # Summary
+print("describe")
+x=df.describe()     # Statistics
+print(x)   
+print("shape")
+x=df.shape          # Rows, columns
+print(x)   
+#need only those rows that fullfil this command
+filtereddf=df[df['Airline']!='Jet Airways']
+print(filtereddf)
+
+#to check misssed data entries in t//f
+x=df.isnull()
+print(x)
+s=df.isnull().sum() #Counts the number of missing values per column.
+print(s)
+q=df.dropna()#Removes rows that have any missing values.
+print(q)
+df.dropna(subset=['airline', 'money'])#Only drops rows if certain columns are missing.
+a=df.drop('Airline',axis=1) #to drop columns:
+print(a)
