@@ -1,0 +1,12 @@
+import hashlib
+
+s = "mypassword"
+hashed = hashlib.md5(s.encode()).hexdigest()
+
+print(f"Hashed value is: {hashed}")
+
+
+
+ hashes can be used when you need fast lookups, counting, or duplicate detection using dict or set.
+They’re great for mapping relationships, grouping similar items, or checking data integrity.
+Also used in security for hashing passwords or encoding values like URLs.
