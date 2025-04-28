@@ -1,0 +1,78 @@
+
+
+# x=df.fillna(0)## Fills all NaNs with 0
+# print(x)
+# x=df['Price'].fillna(df['Price'].mean()) #Fill with column mean
+# print (x)
+
+
+# x=df['Date_of_Journey']
+# x=pd.to_datetime(df['Date_of_Journey'],dayfirst=True)#Change Date_of_Journey from string to proper datetime type.
+# print(x)
+# clean_df=df
+# print(clean_df)
+
+
+
+
+# df['Date_of_Journey'] = pd.to_datetime(df['Date_of_Journey'], dayfirst=True)
+# df['Journey_Day']=df['Date_of_Journey'].dt.day
+# df['Journey_month']=df['Date_of_Journey'].dt.month
+# print(df)
+
+# flightcounts=df['Airline'].value_counts() #How many flights are there for each airline?
+# print(flightcounts)
+
+# #What is the average ticket price by airline?
+# avgpriceairline=df.groupby('Airline')['Price'].mean().sort_values(ascending=False)
+# print(avgpriceairline)
+
+
+
+# airline_counts = df['Airline'].value_counts()#airline wirtth min flights 
+# min_count = airline_counts.min()
+# airlines_with_min = airline_counts[airline_counts == min_count]
+# print(airlines_with_min)
+
+
+# x=df[df['Price']==df['Price'].min()]#Cheapest flight details
+# print(x)
+
+# x=df.info()
+# print(df['Arrival_Time'])
+
+
+
+
+# x=df.copy()#Flights with departure after 6 PM
+# x['Dep_Time']=pd.to_datetime(df['Dep_Time'])
+# ans=x['Dep_Time'].dt.hour>=18
+
+# x=df[ans]
+# print(df)
+
+
+
+# x = df[(df['Source'] == 'Kolkata') & (df['Destination'] == 'Banglore')]
+# print(x)
+
+
+
+x=df.copy()
+df['Duration']=df['Duration'].apply
+print(df['Duration'])
+
+
+x = df.copy()
+
+# Ensure consistent format
+x['Duration'] = x['Duration'].apply(lambda x: x if 'h' in x else '0h ' + x)
+x['Duration'] = x['Duration'].apply(lambda x: x if 'm' in x else x + ' 0m')
+
+# Extract hours
+x['Duration_hours'] = x['Duration'].apply(lambda x: int(x.split('h')[0]))
+
+# Check if flight longer than 5 hours
+x['Long_Flight'] = x['Duration_hours'] >= 5
+
+print(x[['Duration', 'Duration_hours', 'Long_Flight']])
