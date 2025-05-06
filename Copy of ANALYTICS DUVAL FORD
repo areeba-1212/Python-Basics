@@ -1,0 +1,47 @@
+import pandas as pd
+
+# Load the Excel file
+file_path = "/home/bit-and-bytes/Downloads/Copy of ANALYTICS DUVAL FORD 3.1 TO 4.29 AB MERGE.xlsx"
+
+# Load the specific sheet
+parts_df = pd.read_excel(file_path, sheet_name='PARTS ORIGINAL')
+
+# Preview the data
+print(parts_df.head())
+
+#print(parts_df.info())
+
+
+# Task 1 Find the top 5 customers (by name) who spent the most (sum of Extended Net Price).
+x=parts_df.groupby('Customer Full Name')['Extended Cost'].sum()
+top_5_customers = x.sort_values(ascending=False).head(5)
+#print(top_5_customers)
+#print(top_5_customers)
+
+
+#Task2  where the profit (sale - cost) is negative (losses).
+parts_df['Profit'] = parts_df['Extended Net Price'] - parts_df['Extended Cost']
+
+loss_parts = parts_df[parts_df['Profit'] < 0]
+
+print(loss_parts[['RO Number', 'Part Number', 'Part Description', 'Extended Net Price', 'Extended Cost', 'Profit']])
+
+#Task 3
+
+labor_df = pd.read_excel(file_path, sheet_name=' LABOR ORIGINAL')
+labor_charges = labor_df.groupby('Manufacturer')['  Amount'].sum()
+top_manufacturer = labor_charges.sort_values(ascending=False).head(1)
+
+print(top_manufacturer)
+
+
+# Clean column names (remove leading/trailing spaces)
+labor_df.columns = labor_df.columns.str.strip()
+
+# Group by RO Number and sum Labor Hours per job
+labor_hours_per_job = labor_df.groupby('RO Number')['Labor Hours'].sum()
+
+# Calculate the average labor hours per job
+average_labor_hours = labor_hours_per_job.mean()
+
+print(f"Average labor hours per job: {average_labor_hours:.2f}")
