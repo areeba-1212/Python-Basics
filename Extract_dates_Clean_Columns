@@ -1,0 +1,104 @@
+import pandas as pd
+from tkinter import Tk, filedialog
+
+
+
+
+#TASK1 Choose file from computer xlsx and extract dates from it 
+
+# Create a hidden root window
+root = Tk()
+root.withdraw()  # Hide the main window
+
+# Open file dialog to select XLSX file
+file_path = filedialog.askopenfilename(
+    title="Select an XLSX file",
+    filetypes=[("Excel files", "*.xlsx"), ("All files", "*.*")]
+)
+
+# # Check if a file was selected
+# if file_path:
+#     print("Selected file path:", file_path)
+    
+#     Start_date = file_path.split('FORD')[1].split('TO')[0]
+#     print(Start_date)
+
+#     End_date = file_path.split('TO')[1].split('AB')[0]
+#     print(End_date)
+
+#     Month_start = int(Start_date.split('.')[0])
+
+#     Day_Start = int(Start_date.split('.')[1])
+#     print('Start Date: ', Day_Start,'/',Month_start,'/ 2025')
+
+#     Month_end = int(End_date.split('.')[0])
+    
+#     Day_end = int(End_date.split('.')[1])
+#     print('End Date : ', Day_end,'/',Month_end,'/ 2025')
+
+#     # Example of what to do next (optional):
+#     # data = pd.read_excel(file_path)
+#     # print(data.head())
+
+# else:
+#     print("No file selected.")
+
+
+
+
+# # Task 2 COLOUMNS  Simple cleaning 
+
+
+df = pd.read_excel(file_path, sheet_name='ORIGINAL P.L MERGE')
+# Create a copy of the original column names
+original_columns =df.columns.tolist()
+
+# Clean column names (choose the operations you need)
+df.columns =df.columns.str.strip()  # Remove whitespace
+df.columns =df.columns.str.upper()  # Convert to uppercase (or .lower() for lowercase)
+df.columns =df.columns.str.replace('[^a-zA-Z0-9_]', '_', regex=True)  # Replace special chars with underscore
+df.columns =df.columns.str.replace('__+', '_', regex=True)  # Replace multiple underscores with single
+
+# Display cleaned column names
+print("\nCleaned columns:",df.columns.to_list())
+
+# #CHECK , Find INdex from dictions 
+
+
+
+# Hours_dic={'hours','hrs','Hours','Hrs','HRS'}
+
+# matching_cols = []
+# for idx, col in enumerate(df.columns):
+#     if any(keyword.lower() in col.lower() for keyword in Hours_dic):
+#         matching_cols.append((col, idx))  # Store (column_name, index)
+
+# # Print results
+# if matching_cols:
+#     print("Matching columns found:")
+#     for col, idx in matching_cols:
+#         print(f"Column: '{col}' (Index: {idx})")
+# else:
+#     print("No matching columns found.")
+
+  
+
+# #task 3
+
+
+df['CWI'] = (
+    df['CWI']
+    .astype(str)          # Convert everything to string
+    .str.strip()          # Remove whitespace
+    .str.upper()          # Convert to uppercase
+    .replace(['NAN', 'NONE', ''], pd.NA)  # Handle empty/missing values
+)
+
+
+
+filtered_df = df[df['CWI'].isin(['C', 'W', 'I'])]
+print(filtered_df)
+
+output_path = file_path.replace('.xlsx', '_FILTERED.xlsx')
+filtered_df.to_excel(output_path, index=False)
+print(f"✅ Filtered data saved to: {output_path}")
